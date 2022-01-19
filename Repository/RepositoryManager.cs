@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,13 +8,37 @@ namespace Repository
 {
     public class RepositoryManager : IRepositoryManager
     {
-        public ICompanyRepository Company => throw new NotImplementedException();
+        private RepositoryContext _repositoryContext;
+        private ICompanyRepository _companyRepository;
+        private IEmployeeRepository _employeeRepository;
 
-        public ICompanyRepository Employee => throw new NotImplementedException();
-
-        public void Save()
+        public RepositoryManager(RepositoryContext repositoryContext)
         {
-            throw new NotImplementedException();
+            _repositoryContext = repositoryContext;
         }
+
+        public ICompanyRepository Company
+        {
+            get
+            {
+                if (_companyRepository == null)
+                    _companyRepository = new CompanyRepository(_repositoryContext);
+
+                return _companyRepository;
+            }
+        }
+
+        public ICompanyRepository Employee
+        {
+            get
+            {
+                if (_employeeRepository == null)
+                    _employeeRepository = new EmployeeRepository(_repositoryContext);
+
+                return _companyRepository;
+            }
+        }
+
+        public void Save() => _repositoryContext.SaveChanges();
     }
 }

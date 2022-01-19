@@ -4,6 +4,8 @@ using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+
 
 namespace Repository
 {
@@ -11,7 +13,13 @@ namespace Repository
     {
         public CompanyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-
+           
         }
+
+        public IEnumerable<Company> GetAllCompanies(bool trackChanges) =>
+            FindAll(trackChanges).OrderBy(c => c.Name).ToList();
+                  
+
+
     }
 }
