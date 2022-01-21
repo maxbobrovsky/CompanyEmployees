@@ -7,7 +7,7 @@ namespace Contracts
     public interface IRepositoryManager
     {
         ICompanyRepository Company { get; }
-        ICompanyRepository Employee { get; }
+        IEmployeeRepository Employee { get; }
         void Save();
     }
 }

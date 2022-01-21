@@ -28,14 +28,14 @@ namespace Repository
             }
         }
 
-        public ICompanyRepository Employee
+        public IEmployeeRepository Employee
         {
             get
             {
                 if (_employeeRepository == null)
                     _employeeRepository = new EmployeeRepository(_repositoryContext);
 
-                return _companyRepository;
+                return _employeeRepository;
             }
         }
 
